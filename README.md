@@ -23,3 +23,13 @@
 The seeded app entries intentionally have blank `authorizedUrl` values. In the Admin Panel, enter only URLs for learning content/platforms you own or are authorized to distribute. A premium code does not itself create authorization to third-party content.
 
 For production, use HTTPS, a strong unique JWT secret, a strong admin password, and restrict MongoDB network access to your server where possible.
+
+## App selection / premium flow
+- The Premium Access card is hidden from the home app list.
+- Clicking an app opens that app's own detail screen containing Premium Access.
+- BUY NOW opens Telegram with the selected app name in the message, e.g. "Mujhe Next Toppers ka premium khareedna hai."
+- Premium code verification is tied to the selected app.
+- Use only learning URLs/content that you own or are authorized to distribute.
+
+### Admin image upload
+Admin Panel me ab **Add New App** aur existing app edit karte waqt phone se PNG/JPG/WEBP/GIF logo upload kar sakte ho (max 2 MB). Image MongoDB me data URL ke roop me save hoti hai, isliye Render ke local disk par depend nahi karti.
