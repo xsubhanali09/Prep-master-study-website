@@ -9,13 +9,13 @@
 </head>
 <body>
 <div class="ambient ambient1"></div><div class="ambient ambient2"></div>
-<header class="topbar"><div class="brand"><img src="assets/prep-master.png" alt="Prep Master"><span>PREP <b>MASTER</b></span></div></header>
+<header class="topbar"><div class="brand"><img id="siteLogo" src="assets/prep-master.png" alt="Prep Master"><span id="brandName">PREP <b>MASTER</b></span></div></header>
 <main>
   <section class="hero" id="homeHero">
     <div class="logo-wrap"><img src="assets/prep-master.png" alt="Prep Master logo"></div>
-    <div class="eyebrow"><i></i> SELECT ECOSYSTEM</div>
-    <h1>Choose <span>Platform</span></h1>
-    <p>Select a platform to continue.</p>
+    <div class="eyebrow"><i></i> <span id="heroEyebrow">SELECT ECOSYSTEM</span></div>
+    <h1><span id="heroTitle">Choose</span> <span id="heroAccent">Platform</span></h1>
+    <p id="heroSubtitle">Select a platform to continue.</p>
     <div class="search">⌕ <input id="search" placeholder="Search for a platform or feature..."></div>
     <div class="tabs"><button id="appsTab" class="active">Apps</button><button id="myTab">My Apps</button><button id="loginBtn">Login</button></div>
   </section>
@@ -27,12 +27,12 @@
     <button class="back-btn" id="backBtn">← BACK TO APPS</button>
     <div class="detail-head">
       <img id="detailLogo" class="detail-logo" src="assets/prep-master.png" alt="">
-      <div><div class="detail-label">SELECTED PLATFORM</div><h2 id="detailName">Platform</h2><p id="detailDescription">Premium access</p></div>
+      <div><div class="detail-label" id="detailLabel">SELECTED PLATFORM</div><h2 id="detailName">Platform</h2><p id="detailDescription">Premium access</p></div>
     </div>
 
     <section class="premium" id="premium">
       <div class="premium-icon">♛</div>
-      <h2>Premium Access</h2>
+      <h2 id="premiumTitle">Premium Access</h2>
       <p id="premiumText">Platform access ke liye Premium ₹100.</p>
       <button class="buy" id="buy">BUY NOW — ₹100</button>
       <div class="selected" id="selected">Platform selected.</div>
@@ -40,10 +40,10 @@
     </section>
   </section>
 </main>
-<footer>DEVLOPWD BY <b>SUBHAN ALI</b></footer>
+<footer><span id="footerText">DEVLOPWD BY</span> <b id="footerName">SUBHAN ALI</b></footer>
 
 <div class="overlay" id="telegramPopup">
-  <div class="popup"><button class="close" onclick="closePopup()">×</button><div class="warning">!</div><h2>Stay Connected</h2><p>Latest updates aur important announcements ke liye hamare Telegram channel se connected rahein.</p><a class="telegram" href="https://t.me/prepmaster0" target="_blank" rel="noopener noreferrer"><span>➤</span> JOIN TELEGRAM NOW</a><button class="continue" onclick="closePopup()">I UNDERSTAND, CONTINUE</button></div>
+  <div class="popup"><button class="close" onclick="closePopup()">×</button><div class="warning">!</div><h2 id="popupTitle">Stay Connected</h2><p id="popupText">Latest updates aur important announcements ke liye hamare Telegram channel se connected rahein.</p><a class="telegram" id="telegramLink" href="https://t.me/prepmaster0" target="_blank" rel="noopener noreferrer"><span>➤</span> <span id="popupButtonText">JOIN TELEGRAM NOW</span></a><button class="continue" id="popupContinue" onclick="closePopup()">I UNDERSTAND, CONTINUE</button></div>
 </div>
 <div class="overlay hidden" id="auth"><div class="popup"><button class="close" id="authClose">×</button><h2>Account</h2><input id="username" placeholder="Username"><input id="password" type="password" placeholder="Password (6+ chars)"><input id="authMode" type="hidden" value="login"><button class="telegram" id="authSubmit">LOGIN</button><button class="continue" id="toggleAuth">Create account</button></div></div>
 <script src="app.js"></script>

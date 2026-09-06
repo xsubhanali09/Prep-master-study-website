@@ -11,6 +11,27 @@
 <h1>Prep Master Admin Panel</h1>
 <section id="login"><input id="au" placeholder="Username"><input id="ap" type="password" placeholder="Password"><button id="al">LOGIN</button></section>
 <section id="panel" class="hidden">
+
+<h2>🏠 Homepage Settings — Edit Everything</h2>
+<div class="admin-form" id="siteSettings">
+<div class="row"><input id="sBrand" placeholder="Brand name"><input id="sEyebrow" placeholder="Hero eyebrow"></div>
+<div class="row"><input id="sHeroTitle" placeholder="Hero title"><input id="sHeroAccent" placeholder="Hero accent/title second part"></div>
+<input id="sHeroSub" placeholder="Hero subtitle"><input id="sSearch" placeholder="Search placeholder">
+<div class="row"><input id="sAppsTab" placeholder="Apps tab label"><input id="sMyTab" placeholder="My Apps tab label"></div>
+<input id="sLogin" placeholder="Login button label">
+<div class="row"><input id="sFooterText" placeholder="Footer text"><input id="sFooterName" placeholder="Footer name"></div>
+<div class="filebox"><b>🖼️ Homepage Logo</b><input id="sLogoFile" type="file" accept="image/png,image/jpeg,image/webp,image/gif"><div class="status">Max 2 MB.</div></div><div class="preview" id="sLogoPreview"></div>
+<hr style="border-color:#202b42;margin:15px 0">
+<div class="row"><input id="sPopupTitle" placeholder="Telegram popup title"><input id="sPopupButton" placeholder="Telegram button text"></div>
+<textarea id="sPopupText" placeholder="Telegram popup message"></textarea><input id="sPopupContinue" placeholder="Popup continue button text"><input id="sTelegram" placeholder="Telegram URL">
+<hr style="border-color:#202b42;margin:15px 0">
+<div class="row"><input id="sBack" placeholder="Back button text"><input id="sDetailLabel" placeholder="Detail label"></div>
+<div class="row"><input id="sPremiumTitle" placeholder="Premium title"><input id="sVerify" placeholder="Verify button text"></div>
+<input id="sCodePlaceholder" placeholder="Premium code placeholder">
+<textarea id="sPremiumTemplate" placeholder="Premium text template; use {name} and {price}"></textarea><input id="sBuyTemplate" placeholder="Buy button template; use {name} and {price}"><input id="sSelectedTemplate" placeholder="Selected text template; use {name} and {price}">
+<button class="primary" id="saveSettings">SAVE HOMEPAGE SETTINGS</button>
+<p class="admin-help">Changes yahan se save karne par live homepage par apply hongi. App cards ko neeche separately edit kar sakte ho.</p>
+</div>
 <h2>➕ Add New App</h2>
 <div class="admin-form">
 <input id="newName" placeholder="App name (e.g. Next Toppers)">
@@ -32,7 +53,14 @@ async function uploadImage(file){if(!file)return '';const fd=new FormData();fd.a
 $('#al').onclick=async()=>{try{let d=await fetch('/api/admin/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:$('#au').value,password:$('#ap').value})}).then(r=>r.json());if(!d.token)throw Error(d.error);at=d.token;$('#login').classList.add('hidden');$('#panel').classList.remove('hidden');load()}catch(e){alert(e.message)}};
 function esc(v){return String(v??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;')}
 $('#newLogoFile').onchange=()=>{const f=$('#newLogoFile').files[0];if(f)$('#newPreview').innerHTML=`<img src="${URL.createObjectURL(f)}"><span>${esc(f.name)}</span>`};
+
+const settingMap={sBrand:'brandName',sEyebrow:'heroEyebrow',sHeroTitle:'heroTitle',sHeroAccent:'heroAccent',sHeroSub:'heroSubtitle',sSearch:'searchPlaceholder',sAppsTab:'appsTabLabel',sMyTab:'myAppsTabLabel',sLogin:'loginLabel',sFooterText:'footerText',sFooterName:'footerName',sPopupTitle:'popupTitle',sPopupText:'popupText',sPopupButton:'popupButtonText',sPopupContinue:'popupContinueText',sTelegram:'telegramUrl',sBack:'backText',sDetailLabel:'detailLabel',sPremiumTitle:'premiumTitle',sVerify:'verifyText',sCodePlaceholder:'codePlaceholder',sPremiumTemplate:'premiumTextTemplate',sBuyTemplate:'buyTextTemplate',sSelectedTemplate:'selectedTextTemplate'};
+async function loadSettings(){const d=await x('/api/admin/settings');Object.entries(settingMap).forEach(([id,k])=>{if(d[k]!==undefined)$('#'+id).value=d[k]});if(d.siteLogo)$('#sLogoPreview').innerHTML=`<img src="${esc(d.siteLogo)}" alt="logo">`;}
+$('#sLogoFile').onchange=()=>{const f=$('#sLogoFile').files[0];if(f)$('#sLogoPreview').innerHTML=`<img src="${URL.createObjectURL(f)}"><span>${esc(f.name)}</span>`};
+$('#saveSettings').onclick=async()=>{try{const body={};for(const [id,k] of Object.entries(settingMap))body[k]=$('#'+id).value.trim();const f=$('#sLogoFile').files[0];if(f)body.siteLogo=await uploadImage(f);await x('/api/admin/settings',{method:'PUT',body:JSON.stringify(body)});$('#sLogoFile').value='';await loadSettings();alert('Homepage settings saved successfully.')}catch(e){alert(e.message)}};
+
 async function load(){
+await loadSettings();
 let apps=await x('/api/admin/apps');
 $('#appsAdmin').innerHTML=apps.map(a=>`<div class="adminrow"><div class="edit-logo">${a.logo?`<img src="${esc(a.logo)}" onerror="this.style.display='none'">`:''}<b>${esc(a.name)}</b></div><div class="edit-grid"><input data-name="${a._id}" value="${esc(a.name)}" placeholder="App name"><textarea class="full" data-desc="${a._id}" placeholder="Homepage description">${esc(a.description||'')}</textarea><input data-price="${a._id}" type="number" min="0" value="${Number(a.price)||100}" placeholder="Price"><input data-url="${a._id}" value="${esc(a.authorizedUrl||'')}" placeholder="Authorized app URL"><div class="filebox full"><b>Change image:</b> <input data-file="${a._id}" type="file" accept="image/png,image/jpeg,image/webp,image/gif"></div></div><div class="admin-actions"><button class="primary" onclick="save('${a._id}')">SAVE CHANGES</button><button onclick="del('${a._id}')" class="danger">DELETE</button></div></div>`).join('');
 $('#appSelect').innerHTML=apps.map(a=>`<option value="${a._id}">${esc(a.name)}</option>`).join('');

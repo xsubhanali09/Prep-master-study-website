@@ -1,3 +1,7 @@
+let siteSettings={};
+function applySettings(){const s=siteSettings; const set=(id,v)=>{const e=document.getElementById(id);if(e&&v!==undefined)e.textContent=v}; const val=(id,v)=>{const e=document.getElementById(id);if(e&&v!==undefined)e.value=v};
+set('brandName',s.brandName||'PREP MASTER'); if(s.siteLogo) document.getElementById('siteLogo').src=s.siteLogo; set('heroEyebrow',s.heroEyebrow);set('heroTitle',s.heroTitle);set('heroAccent',s.heroAccent);set('heroSubtitle',s.heroSubtitle);val('search',undefined);document.getElementById('search').placeholder=s.searchPlaceholder||'Search for a platform or feature...';set('appsTabLabel',s.appsTabLabel);set('myAppsTabLabel',s.myAppsTabLabel);set('loginLabel',s.loginLabel);set('footerText',s.footerText);set('footerName',s.footerName);set('popupTitle',s.popupTitle);set('popupText',s.popupText);set('popupButtonText',s.popupButtonText);set('popupContinueText',s.popupContinueText);set('detailLabel',s.detailLabel);set('premiumTitle',s.premiumTitle);document.getElementById('telegramLink').href=s.telegramUrl||'#';set('backBtn',s.backText);document.getElementById('code').placeholder=s.codePlaceholder||'Enter Premium Code';set('redeem',s.verifyText||'VERIFY CODE');}
+async function loadSettings(){try{siteSettings=await api('/api/settings');applySettings()}catch(e){console.error(e)}}
 const state={apps:[],my:[],selected:null,tab:'apps'};
 const $=s=>document.querySelector(s);
 const token=()=>localStorage.getItem('pm_token');
@@ -18,9 +22,9 @@ function showDetail(a){
   $('#detailLogo').src=a.logo||'assets/prep-master.png';
   $('#detailName').textContent=a.name;
   $('#detailDescription').textContent=a.description||'Premium access';
-  $('#selected').textContent=`${a.name} selected — Premium ₹${a.price||100} required.`;
-  $('#premiumText').textContent=`${a.name} ka premium access — ₹${a.price||100}.`;
-  $('#buy').textContent=`BUY NOW — ₹${a.price||100}`;
+  const price=a.price||100; $('#selected').textContent=(siteSettings.selectedTextTemplate||'{name} selected — Premium ₹{price} required.').replaceAll('{name}',a.name).replaceAll('{price}',price);
+  $('#premiumText').textContent=(siteSettings.premiumTextTemplate||'{name} ka premium access — ₹{price}.').replaceAll('{name}',a.name).replaceAll('{price}',price);
+  $('#buy').textContent=(siteSettings.buyTextTemplate||'BUY NOW — ₹{price}').replaceAll('{name}',a.name).replaceAll('{price}',price);
   $('#code').value='';
   window.scrollTo({top:0,behavior:'smooth'});
 }
@@ -42,7 +46,7 @@ async function redeem(){
   }catch(e){alert(e.message)}
 }
 function escapeHTML(str){return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;')}
-$('#search').oninput=render;
+$('#appsTab').id='appsTab';$('#myTab').id='myTab'; $('#search').oninput=render; applySettings();
 $('#appsTab').onclick=()=>{state.tab='apps';backToApps();render()};
 $('#myTab').onclick=()=>{myApps();};
 $('#loginBtn').onclick=showAuth;
@@ -52,5 +56,5 @@ $('#toggleAuth').onclick=()=>{$('#authMode').value=$('#authMode').value==='login
 $('#buy').onclick=openTelegram;
 $('#redeem').onclick=redeem;
 $('#backBtn').onclick=backToApps;
-window.addEventListener('load',async()=>{await loadApps();setTimeout(()=>$('#telegramPopup').classList.remove('hide'),250)});
+window.addEventListener('load',async()=>{await loadSettings();await loadApps();setTimeout(()=>$('#telegramPopup').classList.remove('hide'),250)});
 function closePopup(){$('#telegramPopup').classList.add('hide')}
