@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#05070d">
+<title>Prep Master — Choose Platform</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="ambient ambient1"></div>
+<div class="ambient ambient2"></div>
+
+<header class="topbar">
+  <div class="brand">
+    <img src="assets/prep-master.png" alt="Prep Master">
+    <span>PREP <b>MASTER</b></span>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="logo-wrap"><img src="assets/prep-master.png" alt="Prep Master logo"></div>
+    <div class="eyebrow"><i></i> SELECT ECOSYSTEM</div>
+    <h1>Choose <span>Platform</span></h1>
+    <p>Select a platform to continue to its authorized learning page.</p>
+    <div class="search">⌕ <input id="search" placeholder="Search for a platform or feature..."></div><div class="tabs"><button id="appsTab" class="active">Apps</button><button id="myTab">My Apps</button><button id="loginBtn">Login</button></div>
+  </section>
+
+  <section class="platforms" id="platforms"></section>
+
+  <section class="premium hidden" id="premium">
+    <div class="premium-icon">♛</div><h2>Premium Access</h2><p>Platform access ke liye Premium ₹100.</p>
+    <button class="buy" id="buy">BUY NOW — ₹100</button>
+    <div class="selected" id="selected">Koi platform select nahi kiya gaya.</div>
+    <div class="redeem"><input id="code" placeholder="Enter Premium Code"><button id="redeem">VERIFY CODE</button></div>
+  </section>
+
+  <section class="premium" id="premium">
+    <div class="premium-icon">♛</div>
+    <h2>Premium Access</h2>
+    <p>Platform access ke liye Premium ₹100.</p>
+    <button class="buy" onclick="buyPremium()">BUY NOW — ₹100</button>
+    <div class="selected" id="selected">Koi platform select nahi kiya gaya.</div>
+  </section>
+</main>
+
+<footer>DEVLOPWD BY <b>SUBHAN ALI</b></footer>
+
+<!-- Telegram popup shown when the website opens -->
+<div class="overlay" id="telegramPopup">
+  <div class="popup">
+    <button class="close" onclick="closePopup()">×</button>
+    <div class="warning">!</div>
+    <h2>Stay Connected</h2>
+    <p>Latest updates aur important announcements ke liye hamare Telegram channel se connected rahein.</p>
+    <a class="telegram" href="https://t.me/prepmaster0" target="_blank" rel="noopener noreferrer">
+      <span>➤</span> JOIN TELEGRAM NOW
+    </a>
+    <button class="continue" onclick="closePopup()">I UNDERSTAND, CONTINUE</button>
+  </div>
+</div>
+
+<div class="overlay hidden" id="auth"><div class="popup"><button class="close" id="authClose">×</button><h2>Account</h2><input id="username" placeholder="Username"><input id="password" type="password" placeholder="Password (6+ chars)"><input id="authMode" type="hidden" value="login"><button class="telegram" id="authSubmit">LOGIN</button><button class="continue" id="toggleAuth">Create account</button></div></div>
+<script src="app.js"></script>
+</body>
+</html>
