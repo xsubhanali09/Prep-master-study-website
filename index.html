@@ -12,10 +12,10 @@
 <header class="topbar"><div class="brand"><img id="siteLogo" src="assets/prep-master.png" alt="Prep Master"><span id="brandName">PREP <b>MASTER</b></span></div></header>
 <main>
   <section class="hero" id="homeHero">
-    <div class="logo-wrap"><img src="assets/prep-master.png" alt="Prep Master logo"></div>
-    <div class="eyebrow"><i></i> <span id="heroEyebrow">SELECT ECOSYSTEM</span></div>
-    <h1><span id="heroTitle">Choose</span> <span id="heroAccent">Platform</span></h1>
-    <p id="heroSubtitle">Select a platform to continue.</p>
+    <div class="logo-wrap"><img id="heroLogo" src="assets/prep-master.png" alt="Prep Master logo"></div>
+    <div class="eyebrow"><i></i> <span id="heroEyebrow">PREMIUM LEARNING HUB</span></div>
+    <h1><span id="heroTitle">Learn Smarter.</span> <span id="heroAccent">Score Better.</span></h1>
+    <p id="heroSubtitle">Explore your favourite learning platforms, batches and study resources — all in one place.</p>
     <div class="search">⌕ <input id="search" placeholder="Search for a platform or feature..."></div>
     <div class="tabs"><button id="appsTab" class="active">Apps</button><button id="myTab">My Apps</button><button id="loginBtn">Login</button></div>
   </section>
@@ -35,17 +35,22 @@
       <h2 id="premiumTitle">Premium Access</h2>
       <p id="premiumText">Platform access ke liye Premium ₹100.</p>
       <button class="buy" id="buy">BUY NOW — ₹100</button>
+      <button class="help-link" id="videoBtn">How to Purchase Premium?</button>
+      <button class="proof-link hidden" id="proofBtn">VIEW PURCHASE PROOF</button>
       <div class="selected" id="selected">Platform selected.</div>
-      <div class="redeem"><input id="code" placeholder="Enter Premium Code"><button id="redeem">VERIFY CODE</button></div>
+      <div id="purchaseBox"><div class="redeem"><input id="code" placeholder="Enter Premium Code"><button id="redeem">VERIFY CODE</button></div></div>
+      <div id="activeBox" class="active-box hidden">✓ PREMIUM ACTIVE<br><span>You already have premium access. You won’t be asked for the code again on this account.</span></div>
     </section>
   </section>
 </main>
 <footer><span id="footerText">DEVLOPWD BY</span> <b id="footerName">SUBHAN ALI</b></footer>
 
-<div class="overlay" id="telegramPopup">
+<div class="overlay hidden" id="telegramPopup">
   <div class="popup"><button class="close" onclick="closePopup()">×</button><div class="warning">!</div><h2 id="popupTitle">Stay Connected</h2><p id="popupText">Latest updates aur important announcements ke liye hamare Telegram channel se connected rahein.</p><a class="telegram" id="telegramLink" href="https://t.me/prepmaster0" target="_blank" rel="noopener noreferrer"><span>➤</span> <span id="popupButtonText">JOIN TELEGRAM NOW</span></a><button class="continue" id="popupContinue" onclick="closePopup()">I UNDERSTAND, CONTINUE</button></div>
 </div>
 <div class="overlay hidden" id="auth"><div class="popup"><button class="close" id="authClose">×</button><h2>Account</h2><input id="username" placeholder="Username"><input id="password" type="password" placeholder="Password (6+ chars)"><input id="authMode" type="hidden" value="login"><button class="telegram" id="authSubmit">LOGIN</button><button class="continue" id="toggleAuth">Create account</button></div></div>
+<div class="overlay hidden" id="proofModal"><div class="popup"><button class="close" id="proofClose">×</button><h2>Purchase Proof</h2><p>Payment/purchase proof provided by the admin.</p><div id="proofGallery" class="proof-gallery"></div></div></div>
+<div class="overlay hidden" id="successModal"><div class="popup success-popup"><div class="success-mark">✓</div><h2 id="successTitle">Premium Activated</h2><p id="successText">Your premium access has been activated successfully.</p><button class="telegram" id="successContinue">CONTINUE</button></div></div>
 <script src="app.js"></script>
 </body>
 </html>
