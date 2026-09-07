@@ -9,10 +9,9 @@
 </head>
 <body>
 <div class="ambient ambient1"></div><div class="ambient ambient2"></div>
-<header class="topbar"><div class="brand"><img id="siteLogo" src="assets/prep-master.png" alt="Prep Master"><span id="brandName">PREP <b>MASTER</b></span></div><div class="menu-icon" aria-label="Menu"><span></span><span></span><span></span></div></header>
+<header class="topbar"><div class="brand"><img id="siteLogo" src="assets/prep-master.png" alt="Prep Master"><span id="brandName">PREP <b>MASTER</b></span></div><button class="menu-icon" id="menuBtn" aria-label="Menu" type="button"><span></span><span></span><span></span></button></header>
 <main>
   <section class="hero" id="homeHero">
-    <div class="logo-wrap"><img id="heroLogo" src="assets/prep-master.png" alt="Prep Master logo"></div>
     <div class="eyebrow"><i></i> <span id="heroEyebrow">PREMIUM LEARNING PLATFORM</span></div>
     <h1><span id="heroTitle">Learn Smarter.</span> <span id="heroAccent">Score Better.</span></h1>
     <p id="heroSubtitle">Explore your favourite learning platforms, batches and study resources — all in one place.</p>
@@ -48,9 +47,18 @@
 <div class="overlay hidden" id="telegramPopup">
   <div class="popup"><button class="close" onclick="closePopup()">×</button><div class="warning">!</div><h2 id="popupTitle">Stay Connected</h2><p id="popupText">Latest updates aur important announcements ke liye hamare Telegram channel se connected rahein.</p><a class="telegram" id="telegramLink" href="https://t.me/prepmaster0" target="_blank" rel="noopener noreferrer"><span>➤</span> <span id="popupButtonText">JOIN TELEGRAM NOW</span></a><button class="continue" id="popupContinue" onclick="closePopup()">I UNDERSTAND, CONTINUE</button></div>
 </div>
-<div class="overlay hidden" id="auth"><div class="popup"><button class="close" id="authClose">×</button><h2>Account</h2><input id="username" placeholder="Username"><input id="password" type="password" placeholder="Password (6+ chars)"><input id="authMode" type="hidden" value="login"><button class="telegram" id="authSubmit">LOGIN</button><button class="continue" id="toggleAuth">Create account</button></div></div>
+<div class="overlay hidden" id="auth"><div class="popup auth-popup"><button class="close" id="authClose">×</button><h2>Account</h2><div class="auth-options"><button id="loginModeBtn" class="auth-mode active" type="button">LOGIN</button><button id="registerModeBtn" class="auth-mode" type="button">CREATE ACCOUNT</button></div><input id="email" type="email" autocomplete="email" placeholder="Email address"><input id="password" type="password" autocomplete="current-password" placeholder="Password (6+ chars)"><input id="authMode" type="hidden" value="login"><button class="telegram" id="authSubmit" type="button">LOGIN</button></div></div>
 <div class="overlay hidden" id="proofModal"><div class="popup"><button class="close" id="proofClose">×</button><h2>Purchase Proof</h2><p>Payment/purchase proof provided by the admin.</p><div id="proofGallery" class="proof-gallery"></div></div></div>
 <div class="overlay hidden" id="successModal"><div class="popup success-popup"><div class="success-mark">✓</div><h2 id="successTitle">Premium Activated</h2><p id="successText">Your premium access has been activated successfully.</p><button class="telegram" id="successContinue">CONTINUE</button></div></div>
+<div class="drawer-backdrop hidden" id="drawerBackdrop"></div>
+<aside class="side-drawer" id="sideDrawer" aria-hidden="true">
+  <div class="drawer-head"><strong>PREP <b>MASTER</b></strong><button id="drawerClose" class="drawer-close" type="button">×</button></div>
+  <nav class="drawer-nav">
+    <button type="button" id="drawerExplore">📚 <span>Explore Apps</span></button>
+    <button type="button" id="drawerMyApps">⭐ <span>My Apps</span></button>
+    <a href="https://t.me/prepmaster0" target="_blank" rel="noopener noreferrer">✈️ <span>Telegram Channel</span></a>
+  </nav>
+</aside>
 <script src="app.js"></script>
 </body>
 </html>
